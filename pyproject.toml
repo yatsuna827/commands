@@ -14,7 +14,24 @@ flake8 = "^6.0.0"
 black = "^22.12.0"
 mypy = "^0.991"
 pytest = "^7.2.0"
+isort = "^5.11.4"
+pyproject-flake8 = "^6.0.0.post1"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+target-version = ['py310']
+line-length = 120
+
+[tool.isort]
+line_length = 120
+multi_line_output = 3
+include_trailing_comma = true
+known_local_folder=['config',]
+
+[tool.flake8]
+max-line-length = 120
+max-complexity = 18
+ignore = "E203,E266,W503,"
