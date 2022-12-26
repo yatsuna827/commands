@@ -1,7 +1,7 @@
 from commands import Add, Context, Variables
 
 
-def test_set_command():
+def test_add_command():
     ctx = Context()
     add_10_to_var0 = Add(Variables.VAR_0, 10)
     add_var0_to_var1 = Add(Variables.VAR_1, Variables.VAR_0)
