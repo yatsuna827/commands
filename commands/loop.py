@@ -18,4 +18,3 @@ class Loop(Command):
                 if isinstance(command, Break):
                     return
                 command.exec(context)
-
