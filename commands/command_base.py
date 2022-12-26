@@ -46,34 +46,6 @@ class Command(ABC):
         pass
 
 
-class Set(Command):
-    def __init__(self, target: Variables, value: Variables | int) -> None:
-        self._target = target
-        self._value = Term(value)
-
-    def exec(self, context: Context):
-        context.variables[self._target.value] = self._value.resolve(context)
-
-
-class Loop(Command):
-    def __init__(self, times: int, commands: Iterable[Command]) -> None:
-        self._times = times
-        self._commands = commands
-
-    def exec(self, context: Context) -> None:
-        for _ in range(self._times):
-            for command in self._commands:
-                command.exec(context)
-
-
-class Print(Command):
-    def __init__(self, message: str) -> None:
-        self._message = message
-
-    def exec(self, context: Context) -> None:
-        context.out(self._message)
-
-
 class CommandStream(Command):
     def __init__(self, commands: Iterable[Command]) -> None:
         self._commands = commands
