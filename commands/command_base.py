@@ -2,11 +2,11 @@ from abc import ABC
 from typing import Generator, Sequence, Iterable
 from enum import Enum
 
+
 class Variables(Enum):
   VAR_0 = 0
   VAR_1 = 1
   VAR_2 = 2
-
 
 
 class Context:
@@ -14,6 +14,9 @@ class Context:
 
   def __init__(self) -> None:
     self.variables = [0,0,0]
+
+  def out(self, value: str):
+    print(value)
 
 
 class Term:
@@ -61,6 +64,14 @@ class Loop(Command):
     for _ in range(self._times):
       for command in self._commands:
             command.exec(context)
+
+
+class Print(Command):
+  def __init__(self, message: str) -> None:
+    self._message = message
+
+  def exec(self, context: Context) -> None:
+    context.out(self._message)
 
 
 class CommandStream(Command):
