@@ -1,3 +1,3 @@
-from .command_base import Command, CommandStream, Set, Variables, Context
+from .command_base import Command, CommandStream, Context, Loop, Set, Variables
 
-__all__ = ["Command", "CommandStream", "Set", "Variables"]
+__all__ = ["Command", "CommandStream", "Context", "Loop", "Set", "Variables"]

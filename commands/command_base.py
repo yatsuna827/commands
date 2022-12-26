@@ -1,5 +1,5 @@
 from abc import ABC
-from typing import Generator, Sequence
+from typing import Generator, Sequence, Iterable
 from enum import Enum
 
 class Variables(Enum):
@@ -42,6 +42,7 @@ class Command(ABC):
   def exec(self, context: Context) -> None:
     pass
 
+
 class Set(Command):
   def __init__(self, target: Variables, value: Variables | int) -> None:
     self._target = target
@@ -51,10 +52,21 @@ class Set(Command):
     context.variables[self._target.value] = self._value.resolve(context)
 
 
+class Loop(Command):
+  def __init__(self, times: int, commands: Iterable[Command]) -> None:
+    self._times = times
+    self._commands = commands
+  
+  def exec(self, context: Context) -> None:
+    for _ in range(self._times):
+      for command in self._commands:
+            command.exec(context)
+
+
 class CommandStream(Command):
-  def __init__(self, commands: Sequence[Command]) -> None:
+  def __init__(self, commands: Iterable[Command]) -> None:
     self._commands = commands
 
-  def exec(self, context: Context = Context()) -> Generator[str, None, None]:
+  def exec(self, context: Context = Context()):
     for command in self._commands:
       command.exec(context)
