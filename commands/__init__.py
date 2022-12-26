@@ -4,5 +4,6 @@ from .loop import Loop
 from .print import Print
 from .set import Set
 from .subtract import Subtract
+from .use import Use
 
-__all__ = ["Add", "Command", "CommandStream", "Context", "Loop", "Print", "Set", "Subtract", "Variables"]
+__all__ = ["Add", "Command", "CommandStream", "Context", "Loop", "Print", "Set", "Subtract", "Variables", "Use"]
