@@ -42,7 +42,7 @@ jobs:
           name: test_results
           path: artifacts
 
-      - name: display results
-        uses: EnricoMi/publish-unit-test-result-action@v1
+      - name: Display results
+        uses: EnricoMi/publish-unit-test-result-action@v2
         with:
           files: artifacts/**/*.xml
