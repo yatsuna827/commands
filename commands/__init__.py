@@ -1,6 +1,6 @@
 from .add import Add
 from .command_base import Command, CommandStream, Context, Variables
-from .loop import Break, Loop
+from .loop import Break, Continue, Loop
 from .print import Print
 from .set import Set
 from .subtract import Subtract
@@ -12,6 +12,7 @@ __all__ = [
     "Command",
     "CommandStream",
     "Context",
+    "Continue",
     "Loop",
     "Print",
     "Set",

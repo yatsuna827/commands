@@ -7,6 +7,10 @@ class Break(Command):
     pass
 
 
+class Continue(Command):
+    pass
+
+
 class Loop(Command):
     def __init__(self, times: int, commands: Iterable[Command]) -> None:
         self._times = times
@@ -17,4 +21,6 @@ class Loop(Command):
             for command in self._commands:
                 if isinstance(command, Break):
                     return
+                if isinstance(command, Continue):
+                    break
                 command.exec(context)
