@@ -1,14 +1,16 @@
 from typing import Iterable
 
-from .command_base import Command, Context
+from .command_base import Command, Context, ReturnCode
 
 
 class Break(Command):
-    pass
+    def exec(self, context: Context):
+        return ReturnCode.BREAK
 
 
 class Continue(Command):
-    pass
+    def exec(self, context: Context):
+        return ReturnCode.CONTINUE
 
 
 class Loop(Command):
@@ -19,8 +21,9 @@ class Loop(Command):
     def exec(self, context: Context) -> None:
         for _ in range(self._times):
             for command in self._commands:
-                if isinstance(command, Break):
-                    return
-                if isinstance(command, Continue):
-                    break
-                command.exec(context)
+                code = command.exec(context)
+                match code:
+                    case ReturnCode.BREAK:
+                        return
+                    case ReturnCode.CONTINUE:
+                        break

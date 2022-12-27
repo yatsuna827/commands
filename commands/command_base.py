@@ -1,5 +1,5 @@
-from abc import ABC
-from enum import Enum
+from abc import ABC, abstractmethod
+from enum import Enum, auto
 from typing import Iterable
 
 
@@ -10,7 +10,7 @@ class Variables(Enum):
 
 
 class Context:
-    variables: tuple[int, int, int]
+    variables: list[int]
 
     def __init__(self) -> None:
         self.variables = [0, 0, 0]
@@ -41,8 +41,15 @@ class Term:
         return self.label
 
 
+class ReturnCode(Enum):
+    DEFAULT = auto()
+    BREAK = auto()
+    CONTINUE = auto()
+
+
 class Command(ABC):
-    def exec(self, context: Context) -> None:
+    @abstractmethod
+    def exec(self, context: Context) -> ReturnCode | None:
         pass
 
 
