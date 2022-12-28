@@ -1,5 +1,6 @@
 from .add import Add
 from .command_base import Command, CommandStream, Context, ReturnCode, Variables
+from .exit import Exit
 from .if_ import If
 from .loop import Break, Continue, Loop
 from .print import Print
@@ -14,6 +15,7 @@ __all__ = [
     "CommandStream",
     "Context",
     "Continue",
+    "Exit",
     "If",
     "Loop",
     "Print",

@@ -1,6 +1,6 @@
 from typing import Callable
 
-from .command_base import Command, Context, Term, Variables
+from .command_base import Command, Context, Variables
 
 
 class Use(Command):

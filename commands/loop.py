@@ -18,12 +18,16 @@ class Loop(Command):
         self._times = times
         self._commands = commands
 
-    def exec(self, context: Context) -> None:
+    def exec(self, context: Context) -> ReturnCode | None:
         for _ in range(self._times):
             for command in self._commands:
                 code = command.exec(context)
                 match code:
                     case ReturnCode.BREAK:
-                        return
+                        return ReturnCode.DEFAULT
                     case ReturnCode.CONTINUE:
                         break
+                    case ReturnCode.EXIT:
+                        return ReturnCode.EXIT
+
+        return ReturnCode.DEFAULT

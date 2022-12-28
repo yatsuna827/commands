@@ -22,4 +22,7 @@ class If(Command):
                         return ReturnCode.BREAK
                     case ReturnCode.CONTINUE:
                         return ReturnCode.CONTINUE
-        return None
+                    case ReturnCode.EXIT:
+                        return ReturnCode.EXIT
+
+        return ReturnCode.DEFAULT

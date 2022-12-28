@@ -45,6 +45,7 @@ class ReturnCode(Enum):
     DEFAULT = auto()
     BREAK = auto()
     CONTINUE = auto()
+    EXIT = auto()
 
 
 class Command(ABC):
@@ -59,4 +60,8 @@ class CommandStream(Command):
 
     def exec(self, context: Context = Context()):
         for command in self._commands:
-            command.exec(context)
+            code = command.exec(context)
+            if code == ReturnCode.EXIT:
+                return code
+
+        return ReturnCode.DEFAULT
