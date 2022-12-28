@@ -1,4 +1,4 @@
-from commands import Break, Continue, Loop, Print
+from commands import Add, Break, Context, Continue, If, Loop, Print, Variables
 from tests.mocks import MockContext
 
 
@@ -93,3 +93,14 @@ def test_nested_continue():
 
     command.exec(ctx)
     assert ctx.message == "aaa!aaa!aaa!"
+
+
+def test_infinite_loop():
+    ctx = Context()
+    # fmt: off
+    Loop(-1, [
+        Add(Variables.VAR_0, 1),
+        If(lambda c: c.variables[0] >= 100, Break()),
+    ]).exec(ctx)
+    # fmt: on
+    assert ctx.variables == [100, 0, 0]

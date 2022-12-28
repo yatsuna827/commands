@@ -1,3 +1,4 @@
+from itertools import repeat
 from typing import Iterable
 
 from .command_base import Command, Context, ReturnCode
@@ -19,7 +20,7 @@ class Loop(Command):
         self._commands = commands
 
     def exec(self, context: Context) -> ReturnCode | None:
-        for _ in range(self._times):
+        for _ in repeat(0) if self._times < 0 else range(self._times):
             for command in self._commands:
                 code = command.exec(context)
                 match code:
